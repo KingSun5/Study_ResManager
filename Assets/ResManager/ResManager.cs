@@ -1,4 +1,14 @@
 ﻿
+
+/// <summary>
+/// 资源管理属性方法
+/// </summary>
+public interface IResManager
+{
+	ResLoader GetResLoader();//获取资源加载器实例
+}
+
+
 /// <summary>
 /// time:2019/6/30
 /// author:Sun
@@ -6,7 +16,7 @@
 ///
 /// github:https://github.com/KingSun5
 /// csdn:https://blog.csdn.net/Mr_Sun88
-public class ResManager
+public class ResManager:IResManager
 {
 	/// <summary>
 	/// 单例

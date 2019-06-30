@@ -8,6 +8,26 @@ using Object = UnityEngine.Object;
 
 
 /// <summary>
+/// 资源的加载容器属性和方法
+/// </summary>
+public interface IResLoader
+{
+	List<Res> SelfLoadingResList { get; set; } //储存当前容器加载的资源
+	T AssetLoad<T>(string assetPath) where T : Object; //Resources单个资源的同步加载
+	T[] AssetsLoad<T>(string folderPaht) where T : Object; //Resources目录下全部资源加载
+	IEnumerator AssetLoadAsync<T>(string assetPath, Action<T> callback) where T : Object; //异步加载Resources下的单个资源
+	AssetBundle ABLoadFromMemory(string assetPath); //直接加载AB包
+	IEnumerator ABLoadFromMemoryAsync(string assetPath, Action<AssetBundle> callback); //LoadFromMemoryAsync 异步加载AB包
+	AssetBundle ABLoadFromFile(string assetPath); //LoadFromFile直接加载本地AB包
+	IEnumerator ABLoadFromFileAsync(string assetPath, Action<AssetBundle> callback); //从本地异步加载AB资源
+	IEnumerator ABLoadWWW(string assetPath, Action<AssetBundle> callback); //WWW放置加载AB包
+	IEnumerator ABLoadWebRequest(string assetPath, Action<AssetBundle> callback); //WebRequest请求AB包
+	void UnloadAll();//卸载当前加载器资源
+}
+
+
+
+/// <summary>
 /// time:2019/6/30
 /// author:Sun
 /// des:资源的加载容器
@@ -15,7 +35,7 @@ using Object = UnityEngine.Object;
 /// github:https://github.com/KingSun5
 /// csdn:https://blog.csdn.net/Mr_Sun88
 /// </summary>
-public class ResLoader
+public class ResLoader:IResLoader
 {
 
 	/// <summary>
@@ -26,8 +46,17 @@ public class ResLoader
 	/// <summary>
 	/// 自身容器 
 	/// </summary>
-	public List<Res> SelfLoadingResList = new List<Res>();
-	
+	public List<Res> SelfLoadingResList { get; set; }
+
+	public ResLoader()
+	{
+		if (SelfLoadingResList==null)
+		{
+			SelfLoadingResList = new List<Res>();
+		}
+	}
+
+
 	/// <summary>
 	/// Resources单个资源的同步加载
 	/// </summary>
