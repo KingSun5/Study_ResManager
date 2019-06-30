@@ -4,7 +4,7 @@
 /// <summary>
 /// time:2019/6/30
 /// author:Sun
-/// des:资源加载方式演示
+/// des:资源的加载演示
 ///
 /// github:https://github.com/KingSun5
 /// csdn:https://blog.csdn.net/Mr_Sun88
@@ -108,12 +108,12 @@ public class Test : MonoBehaviour
 		
 		#region -----------------WebRequest方法异步加载AB资源--------------
 		
-		var path = Application.dataPath + "/AssetBundles/cube.unity3d.assetbundle";
-		StartCoroutine(SResLoader.ABLoadWebRequest(path, ab =>
-		{
-			Object cube = ab.LoadAsset("Cube.prefab");
-			Instantiate(cube);
-		}));
+//		var path = Application.dataPath + "/AssetBundles/cube.unity3d.assetbundle";
+//		StartCoroutine(SResLoader.ABLoadWebRequest(path, ab =>
+//		{
+//			Object cube = ab.LoadAsset("Cube.prefab");
+//			Instantiate(cube);
+//		}));
 		
 		#endregion
 		
